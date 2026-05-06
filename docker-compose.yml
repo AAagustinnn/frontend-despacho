@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build: .
+    container_name: frontend-despacho
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - frontend-net
+
+networks:
+  frontend-net:
+    driver: bridge
