@@ -30,6 +30,9 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.ECR_REGISTRY }}/frontend-despacho:latest
+          build-args: |
+            VITE_API_URL_VENTAS=${{ secrets.VITE_API_URL_VENTAS }}
+            VITE_API_URL_DESPACHOS=${{ secrets.VITE_API_URL_DESPACHOS }}
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.0
