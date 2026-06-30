@@ -5,6 +5,9 @@ metadata:
   name: despacho-eks
   region: us-east-1
 
+iam:
+  serviceRoleARN: arn:aws:iam::798616695032:role/c218120a5504690l15725576t1w798616-LabEksClusterRole-TEH7vAnkwOss
+
 availabilityZones:
   - us-east-1a
   - us-east-1b
@@ -17,6 +20,8 @@ managedNodeGroups:
     maxSize: 4
     volumeSize: 20
     privateNetworking: false
+    iam:
+      instanceRoleARN: arn:aws:iam::798616695032:role/c218120a5504690l15725576t1w798616695-LabEksNodeRole-UV5b18ZC1CSO
     labels:
       role: worker
     tags:
