@@ -1,35 +1,29 @@
-function Navbar() {
+function Navbar({ activeView, onChangeView }) {
+  const menuItems = [
+    { id: "dashboard", label: "Despachos" },
+    { id: "usuarios", label: "Usuarios" },
+    { id: "productos", label: "Productos" },
+    { id: "configuracion", label: "Configuracion" },
+  ];
+
   return (
     <nav className="rounded-xl w-[250px] min-h-[880px] bg-teal-600 text-white sticky top-0 p-4 m-4">
-      {/* Logo o título */}
       <h2 className="text-xl font-bold mb-8">Despacho Dashboard</h2>
 
-      {/* Menú de navegación */}
       <ul className="space-y-3">
-        <li>
-          <a
-            href="#"
-            className="block font-bold py-2 px-3 hover:bg-teal-700 rounded"
-          >
-            Usuarios
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="block font-bold py-2 px-3 hover:bg-teal-700 rounded"
-          >
-            Productos
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="block font-bold py-2 px-3 hover:bg-teal-700 rounded"
-          >
-            Configuración
-          </a>
-        </li>
+        {menuItems.map((item) => (
+          <li key={item.id}>
+            <button
+              type="button"
+              onClick={() => onChangeView(item.id)}
+              className={`block w-full text-left font-bold py-2 px-3 rounded transition-colors ${
+                activeView === item.id ? "bg-teal-800" : "hover:bg-teal-700"
+              }`}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
       </ul>
     </nav>
   );
