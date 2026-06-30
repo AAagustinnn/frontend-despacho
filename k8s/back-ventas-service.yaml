@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-ventas
+  namespace: despacho
+  labels:
+    app: back-ventas
+spec:
+  type: ClusterIP
+  selector:
+    app: back-ventas
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

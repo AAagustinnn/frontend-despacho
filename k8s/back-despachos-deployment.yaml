@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-despachos
+  namespace: despacho
+  labels:
+    app: back-despachos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-despachos
+  template:
+    metadata:
+      labels:
+        app: back-despachos
+    spec:
+      containers:
+        - name: back-despachos
+          image: BACKEND_IMAGE
+          imagePullPolicy: Always
+          env:
+            - name: SERVICE_NAME
+              value: back-despachos
+            - name: APP_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: despacho-secrets
+                  key: APP_API_TOKEN
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
